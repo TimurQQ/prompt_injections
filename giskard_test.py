@@ -36,20 +36,7 @@ def model_predict(df: pd.DataFrame):
 api_base = "http://localhost:11434" # default api_base for local ol lama
 
 detectors_list = [
-# Tabular_And_NLP_Detectors
-    # 1. Performance
-    "performance_bias",
-    # 2. Robustness
-    "ethical_bias",
-    "text_perturbation",
-    # 3. Calibration
-    "overconfidence",
-    "underconfidence",
-    # 4. Data Leakage
-    "data_leakage",
-    # 5. Stochasticity
-    "stochasticity",
-# Detectors_for_LLM_models
+    # Detectors_for_LLM_models
     # 1. Injection attacks
     "control_chars_injection",
     "jailbreak",

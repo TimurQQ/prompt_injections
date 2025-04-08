@@ -66,7 +66,7 @@ detectors_list = [
     "output_formatting"
 ]
 
-def get_scan_results(detector: str) -> bool:
+def get_scan_results(giskard_model: giskard.Model, detector: str) -> bool:
     scan_results = giskard.scan(giskard_model, only=[detector])
     result = scan_results.to_html(f"scan_results_{detector}.html")
     return result is not None
@@ -74,7 +74,7 @@ def get_scan_results(detector: str) -> bool:
 if __name__ == "__main__":
     giskard.llm.set_llm_model("ollama/qwen2.5", disable_structured_output=True, api_base=api_base)
     giskard.llm.set_embedding_model("ollama/nomic-embed-text", api_base=api_base)
-    giskard_model = giskard.Model(
+    giskard_model: giskard.Model = giskard.Model(
         model=model_predict,
         model_type="text_generation",
         name="Question Answering System for Stephen Hawking's 'A Brief History of Time'",
@@ -86,7 +86,7 @@ if __name__ == "__main__":
         futures = list()
         for detector in detectors_list:
             futures.append(
-                executor.submit(get_scan_results, detector)
+                executor.submit(get_scan_results, giskard_model, detector)
             )
 
         for future in concurrent.futures.as_completed(futures):

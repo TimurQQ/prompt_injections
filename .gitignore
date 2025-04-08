@@ -174,4 +174,4 @@ cython_debug/
 .pypirc
 
 # html giskard reports
-*.html
+#*.html
